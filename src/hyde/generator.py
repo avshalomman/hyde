@@ -10,18 +10,8 @@ openai.api_version = '2023-05-15'
 deployment_name='davinci-003'
 
 
-class Generator:
-    def __init__(self, model_name, api_key):
-        self.model_name = model_name
-        self.api_key = api_key
-    
-    def generate(self):
-        return ""
-
-
-class OpenAIGenerator(Generator):
-    def __init__(self, model_name, api_key, n=8, max_tokens=512, temperature=0.7, top_p=1, frequency_penalty=0.0, presence_penalty=0.0, stop=['\n\n\n'], wait_till_success=False):
-        super().__init__(model_name, api_key)
+class OpenAIGenerator:
+    def __init__(self, n=8, max_tokens=512, temperature=0.7, top_p=1, frequency_penalty=0.0, presence_penalty=0.0, stop=['\n\n\n'], wait_till_success=False):
         self.n = n
         self.max_tokens = max_tokens
         self.temperature = temperature
@@ -46,9 +36,8 @@ class OpenAIGenerator(Generator):
         while not get_results:
             try:
                 result = openai.Completion.create(
-                    engine=self.model_name,
+                    engine=deployment_name,
                     prompt=prompt,
-                    api_key=self.api_key,
                     max_tokens=self.max_tokens,
                     temperature=self.temperature,
                     frequency_penalty=self.frequency_penalty,
