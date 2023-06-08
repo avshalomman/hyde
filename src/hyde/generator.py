@@ -1,6 +1,14 @@
 import time
 import openai
-import cohere
+#import cohere
+
+openai.api_key = os.getenv("AZURE_OPENAI_KEY")
+openai.api_base = os.getenv("AZURE_OPENAI_ENDPOINT")
+openai.api_type = 'azure'
+openai.api_version = '2023-05-15'
+
+deployment_name='davinci-003'
+
 
 class Generator:
     def __init__(self, model_name, api_key):
