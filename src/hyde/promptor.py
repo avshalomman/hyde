@@ -37,6 +37,10 @@ MR_TYDI = """Please write a passage in {} to answer the question in detail.
 Question: {}
 Passage:"""
 
+ABSTRACT_DESCRIPTION = """Please write a single sentence that fits the following description.
+Description: {}
+Sentence:"""
+
 
 class Promptor:
     def __init__(self, task: str, language: str = 'en'):
@@ -60,5 +64,7 @@ class Promptor:
             return TREC_NEWS.format(query)
         elif self.task == 'mr-tydi':
             return MR_TYDI.format(self.language, query)
+        elif self.task == 'description':
+            return ABSTRACT_DESCRIPTION.format(query)
         else:
             raise ValueError('Task not supported')
